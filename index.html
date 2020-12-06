@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mechanical Carolan</title>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script type="text/javascript" src="wildwebmidi.js"></script>
+      <script type="text/javascript" src="midiplayer.js"></script>
+    
+    <script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
+    <script src="https://www.verovio.org/javascript/pdfkit/blobstream.js" type="text/javascript"></script>
+    <script src="https://www.verovio.org/javascript/pdfkit/pdfkit.js" type="text/javascript"></script>
+    <script src="https://www.verovio.org/javascript/pdfkit/source.js" type="text/javascript"></script>
+    <script src="https://www.verovio.org/javascript/pdfkit/vrv-ttf.js" type="text/javascript"></script>
+    <script src="FileSaver.min.js" type="text/javascript"></script>
+    <script src="main.js" type="module"></script>
+    <link href="style.css" rel="stylesheet">
+    <link rel= "icon" rel="image/png" href="/favoriteicon.png?"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Mechanical Carolan</title>
+    <h2>Computer-generated Music</h2>
+
+     <h3 style='display: inline; margin-bottom: -10px;'>Level of Detail:</h3>
+     <p class="detail_level" id="detail_level" style='text-align: center;'></p>
+     <form>
+      <input type="range" class="detail" id="detail" name="detail" min="1" max="3">
+    </form> 
+    <div class="row">
+      <div class="column" style="background-color:#7d7d7d;">
+        <h2>Song Generator</h2>
+        <form id="song_gen_form">
+        <h3 style="display: inline;">Key:</h3>
+        <select id="Key" name="key" class="form-selection">
+          <option value="C">C (B#)</option>
+          <option value="Cs">C# / Db</option>
+          <option value="D">D</option>
+          <option value="Ds">D# / Eb</option>
+          <option value="E">E (Fb)</option>
+          <option value="F">F (E#)</option>
+          <option value="Fs">F# / Gb</option>
+          <option value="G">G</option>
+          <option value="Gs">G# / Ab</option>
+          <option value="A">A</option>
+          <option value="As">A# / Bb</option>
+          <option value="B">B (Cb)</option>
+        </select> <br>
+        <h3 style="display: inline;"> Scale: </h3>
+        <select id="Scale" name="scale" class="form-selection" style='display: inline;'>
+          <option value="Major (Ionian)">Major (Ionian)</option>
+          <option value="Minor (Aeolian)"> Minor (Aeolian)</option>
+          <option value="Lydian">Lydian</option>
+          <option value="Dorian">Dorian</option>
+          <option value="Phrygian">Phrygian</option>
+          <option value="Mixolydian">Mixolydian</option>
+        </select>
+        <h3 style="display: inline"><br>Meter:</h3>
+        <select class="form-selection" name="meter" style="display: inline">
+          <option selected value="(4,4)">(4,4)</option>
+          <option value="(3,4)">(3,4)</option>
+          <option value="(2,4)">(2,4)</option>
+          <option value="(1,4)">(1,4)</option>
+          <option value="(5,4)">(5,4)</option>
+          <option value="(6,4)">(6,4)</option>
+          <option value="(3,8)">(3,8)</option>
+          <option value="(5,8)">(5,8)</option>
+          <option value="(6,8)">(6,8)</option>
+          <option value="(7,8)">(7,8)</option>
+          <option value="(9,8)">(9,8)</option>
+          <option value="(12,8)">(12,8)</option>
+        </select>
+        <h3 class="medium" style="display: inline;"> <br>Form:</h3>
+        <select class="form-selection medium" name="form" style='display: inline'>
+          <option value="One-part">One-part</option>
+          <option value="Binary">Binary</option>
+          <option value="Ternary">Ternary</option>
+          <option value="Arch">Arch</option>
+          <option value="Sonata">Sonata</option>
+          <option selected value="AABB">AABB</option>
+          <option value="Ballade">Ballad #1</option>
+          <option value="Ballad">Ballad #2</option>
+          <option value="Ballade3">Ballad #3</option>
+        </select>
+        <h3 style="display: inline" class="medium"><br>Octave Shift:</h3>
+        <select class="form-selection medium" name="octave_shift" id="octave_shift" style="display: inline">
+          <option value="2">+2</option>
+          <option value="1">+1</option>
+          <option value="0" selected="true">0</option>
+          <option value="-1">-1</option>
+        </select>
+        <h3 class="medium"> <br><br>Rhythm intensity, from calm to intense: </h3>
+        <input type="range" class="detail medium" id="beat intensity" name="rhythm_pdf" min="0" max="10" style="display: inline;">
+        <h3 class="pro" style='display: none;'> <br><br>Max difference in adjacent notes, in # of halfsteps: </h3>
+        <input type="text" class="form-entry pro" name="max_step_size" id="max step size" min="1" max="24" value="13" style='display: none;'>
+        <h3 class="pro" style='display: none;'> <br><br>Range of pitches in melody, in # of halfsteps: </h3>
+        <input type="text" class="form-entry pro" name="pitch_range" id="pitch range mel" min="1" max="50" value="17" style='display: none;'>
+        <h3 class="pro" style='display: none;'><br><br> # of repetitions of rhythm in melody: </h3>
+        <input type="text" class="form-entry pro" name="rhythm_repetition_in_mel" id="rhythm_repetition_in_mel" min="0" max="99" value="2" style='display: none'>
+        <h3 class="pro" style='display: none;'> <br><br># of repetitions in part: </h3>
+        <input type="text" class="form-entry pro" name="repetitions_in_part" id="repetitions_in_part" min="0" max="99" style='display: none' value="1">
+        <h3 class="pro" style='display: none;'> <br><br># of repetitions of chord progression per part: </h3>
+        <input type="text" class="form-entry pro" name="repeat_chord_progression_in_part" id="repeat_chord_progression_in_part" value="0" min="0" max="99" style='display: none'>
+      <br><br>
+      <button class="form-button" type="submit" id="submit_song_gen">Apply Settings</button>
+      </form>
+      </h3>
+      </div>
+    </div>
+    <div style="margin-right: auto; margin-left: auto; margin-right: auto;">
+      <a id="startPlayingButton" href="javascript:startPlaying();">Click to play!</a>
+        <div id="player" style="display: inline-block;">
+        </div>
+        <button id="modalButton" class="button" style="display: inline-block; margin-left: 10px;">PDF</button>
+        <a id="downloadMIDI" class="button" style="display: inline-block; margin-left: 10px; text-decoration: none;">MIDI</a>
+    </div>
+        <div id="pdfOptionsForm" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span class="close">&times;</span>
+                    <form>
+                        <div id="format" class="NoteClefSelection">
+                            <input type="radio" name="Format" id="A4" value="1">
+                            <label for="A4" style="margin-left: 10px; margin-right: 20px; width: 100px;">A4</label>
+                            <input type="radio" name="Format" id="US Letter" checked value="2">
+                            <label for="US Letter" style="width: 100px; margin-right: 16px;">US Letter</label><br><br>
+                        </div>
+                    </form>
+                    <form>
+                        <div id="orientation" class="NoteClefSelection">
+                            <input type="radio" name="Format" id="Portrait" checked value="1">
+                            <label for="Portrait" style="margin-right: 20px; width: 100px;">Portrait</label>
+                            <input type="radio" name="Format" id="Landscape" value="2">
+                            <label for="Landscape" style="width: 100px;">Landscape</label><br><br>
+                        </div>
+                    </form>
+                    <button id="downloadPDF" class="button" style="width: 100px; margin-right: 6px;">Download</button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+          var verovioToolkit = new verovio.toolkit();
+          let isPlaying = false;
+          let page = 1;
+          let ids = [];
+
+          // mainly to flag the playing notes to be red
+          let midiUpdate = function(time) {
+              let vrvTime = Math.max(0, time - 400);
+              let elementsattime = verovioToolkit.getElementsAtTime(vrvTime);
+              if (elementsattime.page > 0) {
+                  if (elementsattime.page != page) {
+                      page = elementsattime.page;
+                      loadPage();
+                  }
+                  if ((elementsattime.notes.length > 0) && (ids != elementsattime.notes)) {
+                      ids.forEach(function(noteid) {
+                          if ($.inArray(noteid, elementsattime.notes) === -1) {
+                              $("#" + noteid).attr("fill", "#000").attr("stroke", "#000"); 
+                          }
+                      });
+                      ids = elementsattime.notes;
+                      ids.forEach(function(noteid) {
+                          if ($.inArray(noteid, elementsattime.notes) != -1) {
+                              $("#" + noteid).attr("fill", "#c00").attr("stroke", "#c00");; 
+                          }
+                      }); 
+                  }
+              }
+          }
+
+          let midiStop = function() {
+              ids.forEach(function(noteid) {
+                  $("#" + noteid).attr("fill", "#000").attr("stroke", "#000"); 
+              });
+              $("#player").hide();
+              isPlaying = false;
+          }
+          
+          function startPlaying() {
+              console.log(localStorage.getItem("song"));
+              if (isPlaying == false) {
+                  let songToPlay = localStorage.getItem("song");
+                  $("#player").show();
+                  $("#player").midiPlayer.play(songToPlay);
+                  isPlaying = true;
+              }
+          }
+
+          // hitting "enter" triggers playing 
+          $(window).keyup(function(event){
+              if (event.keyCode === 13) {
+                  startPlaying();
+              }
+          });
+
+          // on page refresh, clear localStorage song
+          $(document).ready(function() {
+              localStorage.setItem("song", "");
+              $("#player").midiPlayer({
+                  color: "red",
+                  onUpdate: midiUpdate,
+                  onStop: midiStop,
+                  width: 20
+              });
+        });
+      </script>
+    <div id="svgNotesContainer"></div>
+    </body>
+
+</html>

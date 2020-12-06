@@ -1,0 +1,675 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body { 
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    background-color: #222;
+    text-align: center;
+}
+
+.banner {
+    max-width: 1200px;
+    max-height: 340px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 0px -90px;
+}
+
+.title {
+    color: #F50890;
+    font-size: 40px;
+    text-shadow: 0px -1px 5px #F5F408;
+}
+
+.content {
+    background-color: #FAD7A0;
+    padding: 30px;
+    border-style: double;
+    border-width: 5px;
+    font-size: 18px;
+    text-align: left;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.key {
+    position: absolute;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 100;
+    font-size: 12px;
+    border: 1px solid rgba(32,32,32,0.2);
+    border-radius: 0px 0px 5px 5px;
+    cursor: pointer;
+    box-shadow: 0px 5px 1px rgba(32,32,32,0.2);
+    -webkit-transition: margin 0.05s ease, background-color 0.05s ease, box-shadow 0.05s ease;
+}
+
+.key:hover { 
+    background-color: #1BC0EA/*#71DB90*/;
+}
+    
+.key .label {
+    font-size: 0px;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    left: 0px;
+    right: 0px;
+}
+
+.keyLabel {
+    font-weight: 900;
+    text-shadow: 0px -1px 5px #EBF508;
+    font-size: 15px;
+}
+
+.black {
+    background-color: rgb(32,32,32);
+    color: #ffffff;
+    z-index: 1;
+    text-shadow: 0px -1px 1px #FF0000;
+}
+    
+.white {
+    background-color: #F2F2DE;
+    color: #3008F5;
+    z-index: 0;
+    text-shadow: 0px 1px 1px #08E8F5;
+}
+    
+.keyboard-holder {
+    margin: 30px auto;
+    height: 200px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    max-width: 1200px;
+    width: 100%;
+}
+
+#NoteSelection {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+}
+
+.NoteClefSelection input[type=radio] {
+    display: none;
+    margin: 0px
+}
+
+.NoteClefSelection input[type=radio] + label {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 2px;
+    margin-left: -6px;
+}
+
+.NoteClefSelection input[type=radio]:checked + label {
+    background: #666666;
+    color: #eeeeee;
+}
+
+.NoteClefSelection input[type=checkbox] {
+    display: none;
+    margin: 0px
+}
+
+.NoteClefSelection input[type=checkbox] + label {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 2px;
+    margin-left: -6px;
+}
+
+.NoteClefSelection input[type=checkbox]:checked + label {
+    background: #666666;
+    color: #eeeeee;
+}
+
+.button {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.button:active {
+    background: #666666;
+    color: #eeeeee;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #F2F2DE; /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 340px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  } 
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  } to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+.close {
+  color: ;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: -16px;
+}
+
+.close:hover,
+.close:focus {
+  color: #222;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+#keyboard {
+    opacity: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    position: relative;
+}
+
+#svgNotesContainer {
+    margin-top: 15px;
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background-color: #F2F2DE;
+    border-radius: 50px;
+    max-width: 100%;
+}
+
+#startPlayingButton {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-decoration: none;
+    position: relative;
+    margin-top: 50px;
+}
+
+#midiPlayer_div {
+    width: 700px;
+    height: 36px;
+    background: #999;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#midiPlayer_bar {
+    height: 12px;
+    width: 500px;
+    background: #ccc;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#midiPlayer_progres {
+    margin: 0;
+    background: #555;
+    width: 0;
+    height: 100%;
+}
+
+#midiPlayer_playingTime { 
+    width: 45px;
+    margin: 8px;
+    font-size: 16px;
+    text-align: right;
+    font-family: arial;
+    display: inline-block;
+}
+
+#midiPlayer_totalTime {
+    width: 40px;
+    text-align: right;
+    margin: 8px;
+    font-size: 16px;
+    font-family: arial;
+    display: inline-block;
+}
+
+#midiPlayer_div a.icon {
+    margin: 3px;
+    cursor: pointer;
+    background-color: #eee;
+    border: 2px solid #ccc;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    display: none;
+}
+
+#midiPlayer_div a.icon:after,
+#midiPlayer_div a.icon:before {
+    background: #eee;
+    border: 2px solid #ccc;
+    content: '';
+    position: absolute;
+}
+
+#midiPlayer_div a.icon:hover,
+#midiPlayer_div a.icon:hover:after,
+#midiPlayer_div a.icon:hover:before{
+    background-color: #fff;
+}
+
+#midiPlayer_div a.stop{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.stop:after{
+    background: #ccc;
+    height: 9px;
+    left: 7px;
+    top: 7px;
+    width: 8px;
+}
+
+#midiPlayer_div a.stop:hover:after{
+    background: #ccc;
+}
+
+#midiPlayer_div a.stop:before{
+    border: none;
+}
+
+#midiPlayer_div a.pause{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.pause:after,
+#midiPlayer_div a.pause:before{
+    height: 10px;
+    top: 6px;
+    width: 0;
+}
+
+#midiPlayer_div a.pause:after{
+    left: 7px;
+}
+
+#midiPlayer_div a.pause:before{
+    left: 15px;
+}
+
+#midiPlayer_div a.play{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.play:after,
+#midiPlayer_div a.play:before,
+#midiPlayer_div a.play:hover:after,
+#midiPlayer_div a.play:hover:before {
+    background: none;
+}
+
+#midiPlayer_div a.play:after{
+    border-bottom: 8px solid transparent;
+    border-left: 13px solid #ccc;
+    border-right: 13px solid transparent;
+    border-top: 8px solid transparent;
+    height: 0;
+    left: 8px;
+    top: 5px;
+    width: 0;
+}
+
+#midiPlayer_div a.play:before{
+    border: none;
+}
+
+
+
+:root {
+  --button-color: #3ca0e7;
+  --button-color_hover: white;
+}
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Main text \/ */
+
+body {
+  background-color: #222;
+  color: #CCC;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  font: Cambria;
+}
+
+h1 {
+  margin-bottom: 0;
+  color: #eee;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+h2 {
+  margin-top: 0;
+  color: #eee;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+h3 {
+  color: #eee;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+p {
+  color: white;
+  /*span.nobreak {
+    white-space: nowrap;
+  }*/
+  text-align: center;
+  position: relative;
+  /*margin-left: auto;*/
+
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  /*word-wrap: normal;*/
+  /*margin-left: 350px;*/
+  /*margin-right: 350px;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.midi-link {
+  border: 1px solid var(--button-color);
+  color: #3ca0e7;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.midi-link:hover {
+  border: 1px solid var(--button-color_hover);
+  color: var(--button-color_hover);
+}
+
+.form-selection {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 15px;
+}
+
+.form-button {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 18px;
+}
+
+.form-entry {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 15px;
+  width: 5%;
+}
+
+.result {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 15px;
+}
+
+.email-link {
+  text-decoration: none;
+  color: white;"
+}
+
+.email-link:hover {
+  color: #3ca0e7;
+  text-decoration: underline;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  cursor: pointer;
+   /*Hides the slider so custom styles can be added */
+  background: white;
+  border-color: transparent;
+  box-shadow: transparent;
+}
+
+input[type='range'] {
+  background-color: transparent;
+}
+
+#svgNotesContainer {
+    margin-top: 15px;
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background-color: #F2F2DE;
+    border-radius: 50px;
+    max-width: 100%;
+}
+
+#startPlayingButton {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    margin-top: 50px;
+}
+
+#midiPlayer_div {
+    width: 700px;
+    height: 36px;
+    position: relative;
+    margin-top: 10px;
+    background: #999;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#midiPlayer_bar {
+    height: 12px;
+    width: 500px;
+    background: #ccc;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#midiPlayer_progres {
+    margin: 0;
+    background: #555;
+    width: 0;
+    height: 100%;
+}
+
+#midiPlayer_playingTime { 
+    width: 45px;
+    margin: 8px;
+    font-size: 16px;
+    text-align: right;
+    font-family: arial;
+    display: inline-block;
+}
+
+#midiPlayer_totalTime {
+    width: 40px;
+    text-align: right;
+    margin: 8px;
+    font-size: 16px;
+    font-family: arial;
+    display: inline-block;
+}
+
+#midiPlayer_div a.icon {
+    margin: 3px;
+    cursor: pointer;
+    background-color: #eee;
+    border: 2px solid #ccc;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    display: none;
+}
+
+#midiPlayer_div a.icon:after,
+#midiPlayer_div a.icon:before {
+    background: #eee;
+    border: 2px solid #ccc;
+    content: '';
+    position: absolute;
+}
+
+#midiPlayer_div a.icon:hover,
+#midiPlayer_div a.icon:hover:after,
+#midiPlayer_div a.icon:hover:before{
+    background-color: #fff;
+}
+
+#midiPlayer_div a.stop{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.stop:after{
+    background: #ccc;
+    height: 9px;
+    left: 7px;
+    top: 7px;
+    width: 8px;
+}
+
+#midiPlayer_div a.stop:hover:after{
+    background: #ccc;
+}
+
+#midiPlayer_div a.stop:before{
+    border: none;
+}
+
+#midiPlayer_div a.pause{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.pause:after,
+#midiPlayer_div a.pause:before{
+    height: 10px;
+    top: 6px;
+    width: 0;
+}
+
+#midiPlayer_div a.pause:after{
+    left: 7px;
+}
+
+#midiPlayer_div a.pause:before{
+    left: 15px;
+}
+
+#midiPlayer_div a.play{
+    border-radius: 100%;
+    height: 26px;
+    width: 26px;
+}
+
+#midiPlayer_div a.play:after,
+#midiPlayer_div a.play:before,
+#midiPlayer_div a.play:hover:after,
+#midiPlayer_div a.play:hover:before {
+    background: none;
+}
+
+#midiPlayer_div a.play:after{
+    border-bottom: 8px solid transparent;
+    border-left: 13px solid #ccc;
+    border-right: 13px solid transparent;
+    border-top: 8px solid transparent;
+    height: 0;
+    left: 8px;
+    top: 5px;
+    width: 0;
+}
+
+#midiPlayer_div a.play:before{
+    border: none;
+}
