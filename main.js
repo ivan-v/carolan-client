@@ -221,7 +221,8 @@ function main() {
         key_id.value = val;
     });
     
-    var midi_url = "http://localhost:8013/song_gen?" + form_details;
+    // var midi_url = "http://localhost:8013/song_gen?" + form_details;
+    var midi_url = "https://carolan.uk.r.appspot.com/song_gen?" + form_details;
     
     console.log(midi_url);
     fetch(midi_url).then(res => res.json()).then((out) => {
